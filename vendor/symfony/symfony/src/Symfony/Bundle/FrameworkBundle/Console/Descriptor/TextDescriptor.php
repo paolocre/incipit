@@ -127,9 +127,9 @@ class TextDescriptor extends Descriptor
         $showPrivate = isset($options['show_private']) && $options['show_private'];
 
         if ($showPrivate) {
-            $options['output']->title('Symfony Container Public and Private Tags');
+            $options['output']->title('Symfony Container Public and Private Tag');
         } else {
-            $options['output']->title('Symfony Container Public Tags');
+            $options['output']->title('Symfony Container Public Tag');
         }
 
         foreach ($this->findDefinitionsByTag($builder, $showPrivate) as $tag => $definitions) {
@@ -289,7 +289,7 @@ class TextDescriptor extends Descriptor
         } else {
             $tagInformation = '-';
         }
-        $tableRows[] = array('Tags', $tagInformation);
+        $tableRows[] = array('Tag', $tagInformation);
 
         $calls = $definition->getMethodCalls();
         if (count($calls) > 0) {

@@ -742,7 +742,7 @@ class Inline
             return $tag;
         }
 
-        throw new ParseException(sprintf('Tags support is not enabled. Enable the `Yaml::PARSE_CUSTOM_TAGS` flag to use "!%s".', $tag));
+        throw new ParseException(sprintf('Tag support is not enabled. Enable the `Yaml::PARSE_CUSTOM_TAGS` flag to use "!%s".', $tag));
     }
 
     /**

@@ -36,6 +36,25 @@
                             <a class="nav-link" href="/register">Register</a>
                         </li>
                     </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="btn" href="{{ path('fos_user_profile_show') }}">Profile</a></li>
+                                    <li role="separator" class="divider"></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="btn btn-danger" href="{{ path('fos_user_security_logout') }}">
+                                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                </a>
+                            </li>
+                        {% else %}
+                            <li><a class="btn btn-success" href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
+                        {% endif %}
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -43,16 +62,7 @@
         <div class="container">
 
             <div class="starter-template">
-                <div>
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
-                        <a class="btn btn-danger" href="{{ path('fos_user_security_logout') }}">
-                            {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                        </a>
-                    {% else %}
-                        <a class="btn btn-success" href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-                    {% endif %}
-                </div>
+
                 {% for flash_message in app.session.flashBag.get('notice') %}
                     <hr>
                     <p class="alert alert-success">{{ flash_message }}</p>
